@@ -1,5 +1,6 @@
 import { ArrowRight, Download } from 'lucide-react';
 import { motion } from 'motion/react';
+import imgRipple from "figma:asset/ea126a9dee2d9354f9fb83b72d65dd92c9329d3f.png";
 
 interface HeroProps {
   onDownloadReport: () => void;
@@ -44,32 +45,66 @@ export function Hero({ onDownloadReport }: HeroProps) {
           className="max-w-5xl mx-auto mb-12"
         >
           <div className="relative aspect-[21/9] bg-gradient-to-br from-stone-200 to-emerald-100 rounded-3xl overflow-hidden shadow-2xl">
-            {/* Subtle Pattern */}
-            <div className="absolute inset-0 opacity-20">
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96">
-                {[...Array(5)].map((_, i) => (
-                  <motion.div
-                    key={i}
-                    initial={{ opacity: 0, scale: 0 }}
-                    animate={{ opacity: 0.3, scale: 1 + i * 0.3 }}
-                    transition={{
-                      duration: 2,
-                      delay: i * 0.3,
-                      repeat: Infinity,
-                      repeatDelay: 3,
-                    }}
-                    className="absolute inset-0 border-2 border-emerald-600 rounded-full"
-                    style={{ borderWidth: `${2 - i * 0.3}px` }}
-                  />
-                ))}
-              </div>
-            </div>
-            
             {/* Placeholder Text */}
             <div className="absolute inset-0 flex items-center justify-center">
-              <div className="text-center text-stone-400">
-                <div className="text-sm mb-2">[ 리플 이펙트 비주얼 ]</div>
-                <div className="text-xs">수면에 퍼지는 물결 이미지</div>
+              {/* Background image */}
+              <img
+                src={imgRipple}
+                alt="물결 리플 이펙트"
+                className="absolute inset-0 w-full h-full object-cover rounded-[24px]"
+              />
+
+              {/* Figma Container1 — 원형 리플 테두리 오버레이 (opacity-20 wrapper) */}
+              <div className="absolute inset-0 opacity-20 pointer-events-none">
+                {/* 모든 원은 이미지 중앙에서 렌더링 */}
+                <div className="absolute top-1/2 left-1/2">
+                  {/* Container3: 384px */}
+                  <div
+                    className="absolute border-2 border-[#096] rounded-full opacity-30"
+                    style={{ width: 384, height: 384, left: -192, top: -192 }}
+                  />
+                  {/* Container4: 494px */}
+                  <div
+                    className="absolute border border-[#096] rounded-full opacity-30"
+                    style={{ width: 494.459, height: 494.459, left: -247.23, top: -247.23 }}
+                  />
+                  {/* Container5: 567px */}
+                  <div
+                    className="absolute border border-[#096] rounded-full opacity-[0.28]"
+                    style={{ width: 567.589, height: 567.589, left: -283.795, top: -283.795 }}
+                  />
+                  {/* Container6: 590px */}
+                  <div
+                    className="absolute border border-[#096] rounded-full opacity-[0.24]"
+                    style={{ width: 590.435, height: 590.435, left: -295.218, top: -295.218 }}
+                  />
+                  {/* Container7: 556px */}
+                  <div
+                    className="absolute border border-[#096] rounded-full opacity-20"
+                    style={{ width: 556.726, height: 556.726, left: -278.363, top: -278.363 }}
+                  />
+                </div>
+              </div>
+
+              {/* Animation layer — 최상단 렌더링 */}
+              <div className="absolute inset-0 pointer-events-none">
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96">
+                  {[...Array(5)].map((_, i) => (
+                    <motion.div
+                      key={i}
+                      initial={{ opacity: 0, scale: 0 }}
+                      animate={{ opacity: 0.3, scale: 1 + i * 0.3 }}
+                      transition={{
+                        duration: 2,
+                        delay: i * 0.3,
+                        repeat: Infinity,
+                        repeatDelay: 3,
+                      }}
+                      className="absolute inset-0 border-2 border-emerald-600 rounded-full"
+                      style={{ borderWidth: `${2 - i * 0.3}px` }}
+                    />
+                  ))}
+                </div>
               </div>
             </div>
           </div>
